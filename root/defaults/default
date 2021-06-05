@@ -1,4 +1,4 @@
-## Version 2018/03/06 - Changelog: https://github.com/maxime1907/docker-filegator/master
+## Version 2021/06/05 - Changelog: https://github.com/xakaff/filegator/master
 
 server {
 	listen 80 default_server;
@@ -32,10 +32,10 @@ server {
 
 	location ~ \.php$ {
 		fastcgi_split_path_info ^(.+\.php)(/.+)$;
-		# With php5-cgi alone:
+		# With php8.0-cgi alone:
 		fastcgi_pass 127.0.0.1:9000;
-		# With php5-fpm:
-		#fastcgi_pass unix:/var/run/php5-fpm.sock;
+		# With php8.0-fpm:
+		#fastcgi_pass unix:/var/run/php8.0-fpm.sock;
 		fastcgi_index index.php;
 		include /etc/nginx/fastcgi_params;
 
