@@ -1,51 +1,6 @@
-# [maxime1907/filegator](https://github.com/maxime1907/docker-filegator)
-
-[![GitHub Stars](https://img.shields.io/github/stars/maxime1907/docker-filegator.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/maxime1907/docker-filegator)
-[![GitHub Release](https://img.shields.io/github/release/maxime1907/docker-filegator.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/maxime1907/docker-filegator/releases)
-[![GitHub Package Repository](https://img.shields.io/static/v1.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=maxime1907.io&message=GitHub%20Package&logo=github)](https://github.com/maxime1907/docker-filegator/packages)
-[![MicroBadger Layers](https://img.shields.io/microbadger/layers/maxime1907/filegator.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge)](https://microbadger.com/images/maxime1907/filegator "Get your own version badge on microbadger.com")
-[![Docker Pulls](https://img.shields.io/docker/pulls/maxime1907/filegator.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=pulls&logo=docker)](https://hub.docker.com/r/maxime1907/filegator)
-[![Docker Stars](https://img.shields.io/docker/stars/maxime1907/filegator.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=stars&logo=docker)](https://hub.docker.com/r/maxime1907/filegator)
-
-[FileGator](https://filegator.io) is a free, open-source, self-hosted web application for managing files and folders.
-
-[![FileGator](https://raw.githubusercontent.com/filegator/filegator/master/dist/img/logo.png)](https://filegator.io)
-
-## Supported Architectures
-
-Our images support multiple architectures such as `x86-64`. We utilise the docker manifest for multi-platform awareness. More information is available from docker [here](https://github.com/docker/distribution/blob/master/docs/spec/manifest-v2-2.md#manifest-list) and our announcement [here](https://blog.linuxserver.io/2019/02/21/the-lsio-pipeline-project/).
-
-Simply pulling `maxime1907/filegator` should retrieve the correct image for your arch, but you can also pull specific arch images via tags.
-
-The architectures supported by this image are:
-
-| Architecture | Tag |
-| :----: | --- |
-| x86-64 | latest |
-
-## Version Tags
-
-This image provides various versions that are available via tags. `latest` tag usually provides the latest stable version. Others are considered under development and caution must be exercised when using them.
-
-| Tag | Description |
-| :----: | --- |
-| latest | Stable FileGator releases. |
-
-## Usage
-
-Here are some example snippets to help you get started creating a container.
-
-### docker-compose ([recommended](https://docs.linuxserver.io/general/docker-compose))
-
-Compatible with docker-compose v3 schemas.
-
-```yaml
----
-version: '3.7'
-
 services:
   filerun:
-    image: maxime1907/filegator
+    image: unionk/filegator
     container_name: filegator
     ports:
       - 80:80
@@ -73,7 +28,7 @@ docker run -d \
   -v </path/to/appdata/config>:/config \
   -v </path/to/data>:/data \
   --restart unless-stopped \
-  maxime1907/filegator
+  unionk/filegator
 ```
 
 
@@ -177,35 +132,3 @@ Below are the instructions for updating containers:
   --run-once filegator
   ```
 * You can also remove the old dangling images: `docker image prune`
-
-**Note:** We do not endorse the use of Watchtower as a solution to automated updates of existing Docker containers. In fact we generally discourage automated updates. However, this is a useful tool for one-time manual updates of containers where you have forgotten the original parameters. In the long term, we highly recommend using [Docker Compose](https://docs.linuxserver.io/general/docker-compose).
-
-### Image Update Notifications - Diun (Docker Image Update Notifier)
-* We recommend [Diun](https://crazymax.dev/diun/) for update notifications. Other tools that automatically update containers unattended are not recommended or supported.
-
-## Building locally
-
-If you want to make local modifications to these images for development purposes or just to customize the logic:
-```
-git clone https://github.com/maxime1907/docker-filegator.git
-cd docker-filegator
-source $PWD/config.env
-docker build \
-  --no-cache \
-  --pull \
-  --build-arg DOCKER_HUB_USER="$DOCKER_HUB_USER" \
-  --build-arg IMAGE_BUILD_DATE="$IMAGE_BUILD_DATE" \
-  --build-arg IMAGE_VERSION="$IMAGE_VERSION" \
-  -t "$DOCKER_HUB_USER"/"$IMAGE_NAME":"$IMAGE_VERSION" .
-```
-
-The ARM variants can be built on x86_64 hardware using `multiarch/qemu-user-static`
-```
-docker run --rm --privileged multiarch/qemu-user-static:register --reset
-```
-
-Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64`.
-
-## Versions
-
-* **01.02.21:** - Initial Release.
