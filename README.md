@@ -1,3 +1,4 @@
+```
 services:
   filerun:
     image: unionk/filegator
